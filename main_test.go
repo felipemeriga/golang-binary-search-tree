@@ -46,3 +46,11 @@ func TestPreOrderTraverse(t *testing.T) {
 	})
 }
 
+func TestPostOrderTraverse(t *testing.T) {
+	CreateBasicTree()
+	bst.PostOrderTraverse(func(i Item) {
+		fmt.Println(i)
+	})
+}
+
+

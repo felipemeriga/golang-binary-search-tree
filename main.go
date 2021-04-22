@@ -107,3 +107,19 @@ func preOrderTraverse(n *Node, f func(Item)) {
 		preOrderTraverse(n.right, f)
 	}
 }
+
+// PostOrderTraverse visits all nodes with post-order traversing
+func (bst *ItemBinarySearchTree) PostOrderTraverse(f func(Item)) {
+	bst.lock.Lock()
+	defer bst.lock.Unlock()
+	postOrderTraverse(bst.root, f)
+}
+
+// internal recursive function to traverse post order
+func postOrderTraverse(n *Node, f func(Item)) {
+	if n != nil {
+		postOrderTraverse(n.left, f)
+		postOrderTraverse(n.right, f)
+		f(n.value)
+	}
+}
