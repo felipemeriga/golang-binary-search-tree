@@ -77,6 +77,9 @@ func stringify(n *Node, level int) {
 }
 
 // InOrderTraverse visits all nodes with in-order traversing
+// A good point to enhance is that the traversal receives a function, which is a very
+// effective thing, because traversal may have many purposes, and the specific ones you keep it inside the argument
+// function
 func (bst *ItemBinarySearchTree) InOrderTraverse(f func(Item)) {
 	bst.lock.RLock()
 	defer bst.lock.RUnlock()
