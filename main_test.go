@@ -22,6 +22,7 @@ func fillTree(bst *ItemBinarySearchTree) {
 
 func TestInsert(t *testing.T) {
 	fillTree(&bst)
-
+	bst.String()
 	bst.Insert(11, "11")
+	bst.String()
 }

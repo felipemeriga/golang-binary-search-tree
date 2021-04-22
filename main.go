@@ -1,6 +1,7 @@
 package golang_binary_search_tree
 
 import (
+	"fmt"
 	"github.com/cheekybits/genny/generic"
 	"sync"
 )
@@ -24,6 +25,8 @@ type ItemBinarySearchTree struct {
 
 // Insert inserts the Item t in the tree
 func (bst *ItemBinarySearchTree) Insert(key int, value Item) {
+	bst.lock.Lock()
+	defer bst.lock.Unlock()
 	n := &Node{key, value, nil, nil}
 	if bst.root == nil {
 		bst.root = n
@@ -46,5 +49,29 @@ func insertNode(node, newNode *Node) {
 		} else {
 			insertNode(node.right, newNode)
 		}
+	}
+}
+
+// String prints a visual representation of the tree
+func (bst *ItemBinarySearchTree) String() {
+	bst.lock.Lock()
+	defer bst.lock.Unlock()
+	fmt.Println("------------------------------------------------")
+	stringify(bst.root, 0)
+	fmt.Println("------------------------------------------------")
+}
+
+// internal recursive function to print a tree
+func stringify(n *Node, level int) {
+	if n != nil {
+		format := ""
+		for i := 0; i < level; i++ {
+			format += "       "
+		}
+		format += "---[ "
+		level++
+		stringify(n.left, level)
+		fmt.Printf(format+"%d\n", n.key)
+		stringify(n.right, level)
 	}
 }
