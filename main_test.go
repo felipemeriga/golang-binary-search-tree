@@ -1,6 +1,7 @@
 package golang_binary_search_tree
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -26,3 +27,22 @@ func TestInsert(t *testing.T) {
 	bst.Insert(11, "11")
 	bst.String()
 }
+
+func CreateBasicTree() {
+	fillTree(&bst)
+}
+
+func TestInOrderTraverse(t *testing.T) {
+	CreateBasicTree()
+	bst.InOrderTraverse(func(i Item) {
+		fmt.Println(i)
+	})
+}
+
+func TestPreOrderTraverse(t *testing.T) {
+	CreateBasicTree()
+	bst.PreOrderTraverse(func(i Item) {
+		fmt.Println(i)
+	})
+}
+
