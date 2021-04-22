@@ -75,3 +75,35 @@ func stringify(n *Node, level int) {
 		stringify(n.right, level)
 	}
 }
+
+// InOrderTraverse visits all nodes with in-order traversing
+func (bst *ItemBinarySearchTree) InOrderTraverse(f func(Item)) {
+	bst.lock.RLock()
+	defer bst.lock.RUnlock()
+	inOrderTraverse(bst.root, f)
+}
+
+// internal recursive function to traverse in order
+func inOrderTraverse(n *Node, f func(Item)) {
+	if n != nil {
+		inOrderTraverse(n.left, f)
+		f(n.value)
+		inOrderTraverse(n.right, f)
+	}
+}
+
+// PreOrderTraverse visits all nodes with pre-order traversing
+func (bst *ItemBinarySearchTree) PreOrderTraverse(f func(Item)) {
+	bst.lock.Lock()
+	defer bst.lock.Unlock()
+	preOrderTraverse(bst.root, f)
+}
+
+// internal recursive function to traverse pre order
+func preOrderTraverse(n *Node, f func(Item)) {
+	if n != nil {
+		f(n.value)
+		preOrderTraverse(n.left, f)
+		preOrderTraverse(n.right, f)
+	}
+}
