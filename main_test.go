@@ -53,4 +53,10 @@ func TestPostOrderTraverse(t *testing.T) {
 	})
 }
 
+func TestTreeHeight(t *testing.T) {
+	CreateBasicTree()
+	treeHeight := bst.Height()
+	fmt.Println(treeHeight)
+}
+
 

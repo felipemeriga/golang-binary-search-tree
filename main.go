@@ -126,3 +126,24 @@ func postOrderTraverse(n *Node, f func(Item)) {
 		f(n.value)
 	}
 }
+
+func (bst *ItemBinarySearchTree) Height() int {
+	return measureHeight(bst.root)
+}
+
+func measureHeight(n *Node) int {
+	var lHeight int
+	var rHeight int
+
+	if n == nil {
+		return 0
+	}
+	lHeight = measureHeight(n.left)
+	rHeight = measureHeight(n.right)
+
+	if lHeight > rHeight {
+		return lHeight + 1
+	} else {
+		return rHeight + 1
+	}
+}
